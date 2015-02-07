@@ -13,13 +13,17 @@ endif
 
 " import"
 NeoBundleFetch 'Shougo/neobundle.vim'
-NeoBundle 'tomasr/molokai'
 NeoBundle 'Shougo/neocomplcache.git'
+ ""vimでgit を使う
 NeoBundle 'Shougo/unite.vim.git'
-NeoBundle 'scrooloose/nerdtree' 
+"" フォルダツリーNeoBundle 'scrooloose/nerdtree' 
+""Ctrl+p で IDEみたいなファイル開く'
 NeoBundle 'ctrlp'
+""シンタックスハイライトの定番'
 NeoBundle 'syntastic'
+""自動的に括弧
 NeoBundle 'Townk/vim-autoclose'
+""ファイル内グレップ　グレップしたファイル開ける
 NeoBundle 'grep.vim'
 filetype plugin indent on
 "*********************** neo bundle **********************************"
@@ -33,6 +37,7 @@ set cmdheight=2    " メッセージ表示欄を2行確保"
 set showmatch      " 対応する括弧を強調表示"
 set helpheight=999 " ヘルプを画面いっぱいに開く"
 set list           " 不可視文字を表示"
+ " " " " "
 " 不可視文字の表示記号指定"
 set listchars=tab:▸\ ,eol:↲,extends:❯,precedes:❮
 
@@ -70,3 +75,29 @@ set shellslash
 set wildmenu wildmode=list:longest,full
 "" コマンドラインの履歴を10000件保存する
 set history=10000
+
+
+"************************ for Unity *******************************"
+
+NeoBundleLazy 'OmniSharp/omnisharp-vim', {
+			\   'autoload': { 'filetypes': [ 'cs' ] },
+			\   'build': {
+			\     'windows' : 'msbuild server/OmniSharp.sln',
+			\     'mac': 'xbuild server/OmniSharp.sln',
+			\     'unix': 'xbuild server/OmniSharp.sln',
+			\   }
+			\ }
+
+NeoBundle 'OrangeT/vim-csharp'
+NeoBundle 'scrooloose/syntastic'
+	set statusline+=%#warningmsg#
+	set statusline+=%{SyntasticStatuslineFlag()}
+	set statusline+=%*
+
+	let g:syntastic_always_populate_loc_list = 1
+	let g:syntastic_auto_loc_list = 1
+	let g:syntastic_check_on_open = 1
+	let g:syntastic_check_on_wq = 0
+
+NeoBundle 'tpope/vim-dispatch'
+"************************ for Unity *******************************"
